@@ -6,7 +6,13 @@ export default function App() {
   const name = 'Seoyoung'
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>My name is {name}</Text>
+      <Text style={styles.text}>
+        {(() => {
+          if (name === 'Hanbit') return 'My name is Hanbit';
+          else if (name === 'Seoyoung') return 'My name is Seoyoung';
+          else return 'My name is React Native';
+        })()}
+      </Text>
       <StatusBar style="auto" />
     </View>
   );
