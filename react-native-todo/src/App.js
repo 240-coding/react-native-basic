@@ -1,8 +1,10 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
+import Input from './components/Input';
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
     flex: 1;
     background-color: ${({ theme }) => theme.background};
     align-items: center;
@@ -20,7 +22,12 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
+                <StatusBar 
+                    barStyle="light-content"
+                    backgroundColor={theme.background}
+                />
                 <Title>TODO List</Title>
+                <Input />
             </Container>
         </ThemeProvider>
     );
