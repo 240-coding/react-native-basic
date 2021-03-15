@@ -35,4 +35,11 @@ const Input = ({placeholder, value, onChangeText, onSubmitEditing}) => {
     );
 };
 
+Input.propTypes = {
+    placeholder: PropTypes.string,
+    value: PropTypes.string.isRequired,
+    onChangeText: PropTypes.func.isRequired,
+    onSubmitEditing: PropTypes.func.isRequired,
+};
+
 export default Input;
