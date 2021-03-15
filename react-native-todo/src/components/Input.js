@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
-const StyledInput = styled.TextInput`
+const StyledInput = styled.TextInput.attrs(({theme}) => ({
+    placeholderTextColor: theme.main,
+}))`
     width: ${({width}) => width - 40}px;
     height: 60px;
     margin: 3px 0;
@@ -13,10 +15,20 @@ const StyledInput = styled.TextInput`
     color: ${({theme}) => theme.text};
 `;
 
-const Input = () => {
+const Input = ({placeholder}) => {
     const width = Dimensions.get('window').width;
 
-    return <StyledInput width={width} />;
+    return (
+        <StyledInput
+            width={width}
+            placeholder={placeholder}
+            maxLength={50}
+            autoCapitalize="none"
+            autoCorrect={false}
+            returnKeyType="done"
+            keyboardAppearance="dark"
+        />
+    );
 };
 
 export default Input;
