@@ -36,11 +36,20 @@ const Task = ({ item, deleteTask, toggleTask, updateTask }) => {
             updateTask(editedTask);
         }
     };
+
+    const _onBlur = () => {
+        if (isEditing) {
+            setIsEditing(false);
+            setText(item.text);
+        }
+    };
+
     return isEditing ? (
         <Input
             value={text}
             onChangeText={text => setText(text)}
             onSubmitEditing={_onSubmitEditing}
+            onBlur={_onBlur}
         />
     ) : (
         <Container>
