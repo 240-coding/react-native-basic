@@ -3,6 +3,7 @@ import { Button } from 'react-native';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
+    background-color: #ffffff;
     align-items: center;
 `;
 
