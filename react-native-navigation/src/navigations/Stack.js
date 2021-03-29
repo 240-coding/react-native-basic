@@ -13,8 +13,12 @@ const StackNavigation = () => {
             screenOptions={{ cardStyle: { backgroundColor: '#ffffff' } }}
         >
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="List" component={List} />
-            <Stack.Screen name="Item" component={Item} />
+            <Stack.Screen
+                name="List"
+                component={List}
+                options={{ headerTitle: 'List Screen' }}
+            />
+            <Stack.Screen name="Detail" component={Item} />
         </Stack.Navigator>
     );
 };
