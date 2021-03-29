@@ -19,8 +19,10 @@ const items = [
     { _id: 3, name: 'Hanbit' },
 ];
 
-const List = () => {
-    const _onPress = item => {};
+const List = ({ navigation }) => {
+    const _onPress = item => {
+        navigation.navigate('Item', { id: item._id, name: item.name });
+    };
 
     return (
         <Container>

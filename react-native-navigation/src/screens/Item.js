@@ -11,10 +11,12 @@ const StyledText = styled.Text`
     margin-bottom: 10px;
 `;
 
-const Item = () => {
+const Item = ({ route }) => {
     return (
         <Container>
             <StyledText>Item</StyledText>
+            <StyledText>ID : {route.params.id}</StyledText>
+            <StyledText>Name: {route.params.name}</StyledText>
         </Container>
     );
 }
