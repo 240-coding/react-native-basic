@@ -13,28 +13,50 @@ const TabNavigation = () => {
     return (
         <Tab.Navigator 
             initialRouteName="Settings"
-            tabBarOptions={{ labelPosition: 'beside-icon', showLabel: false }}
+            tabBarOptions={{ 
+                labelPosition: 'beside-icon', 
+                showLabel: false,
+                style: {
+                    backgroundColor: '#54b7f9',
+                    borderTopColor: '#ffffff',
+                    borderTopWidth: 2,
+                },
+                activeTintColor: '#ffffff',
+                inactiveTintColor: '#cfcfcf',
+            }}
         >
             <Tab.Screen 
                 name="Mail" 
                 component={Mail}
                 options={{
                     tabBarLabel: 'Inbox',
-                    tabBarIcon: props => TabIcon({ ...props, name: 'email' }),
+                    tabBarIcon: props => 
+                        TabIcon({ 
+                            ...props, 
+                            name: props.focused ? 'email' : 'email-outline',
+                        }),
                 }}
             />
             <Tab.Screen 
                 name="Meet" 
                 component={Meet}
                 options = {{
-                    tabBarIcon: props => TabIcon({ ...props, name: 'video' }),
+                    tabBarIcon: props => 
+                        TabIcon({ 
+                            ...props, 
+                            name: props.focused ? 'video' : 'video-outline',
+                        }),
                 }}
             />
             <Tab.Screen 
                 name="Settings" 
                 component={Settings} 
                 options={{
-                    tabBarIcon: props => TabIcon({ ...props, name: 'cog' }),
+                    tabBarIcon: props => 
+                        TabIcon({ 
+                            ...props, 
+                            name: props.focused ? 'cog' : 'cog-outline', 
+                        }),
                 }}    
             />
         </Tab.Navigator>
