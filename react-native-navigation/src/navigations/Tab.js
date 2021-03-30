@@ -13,27 +13,29 @@ const TabNavigation = () => {
     return (
         <Tab.Navigator 
             initialRouteName="Settings"
-            screenOptions={({ route }) => ({
-                tabBarIcon: props => {
-                    let name = '';
-                    if (route.name === 'Mail') name = 'email';
-                    else if (route.name === 'Meet') name = 'video';
-                    else name = 'cog';
-                    return TabIcon({ ...props, name });
-                },
-            })}    
+            tabBarOptions={{ labelPosition: 'beside-icon', showLabel: false }}
         >
             <Tab.Screen 
                 name="Mail" 
                 component={Mail}
+                options={{
+                    tabBarLabel: 'Inbox',
+                    tabBarIcon: props => TabIcon({ ...props, name: 'email' }),
+                }}
             />
             <Tab.Screen 
                 name="Meet" 
                 component={Meet}
+                options = {{
+                    tabBarIcon: props => TabIcon({ ...props, name: 'video' }),
+                }}
             />
             <Tab.Screen 
                 name="Settings" 
                 component={Settings} 
+                options={{
+                    tabBarIcon: props => TabIcon({ ...props, name: 'cog' }),
+                }}    
             />
         </Tab.Navigator>
     );
