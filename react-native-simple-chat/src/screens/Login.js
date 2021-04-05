@@ -1,14 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components/native';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Image, Input, Button } from '../components';
 import { images } from '../utils/images';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validateEmail, removeWhitespace } from '../utils/common';
-import { useEffect } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Alert } from 'react-native';
 import { login } from '../utils/firebase';
+import { ProgressContext } from '../contexts';
 
 
 const Container = styled.View`
@@ -31,6 +31,7 @@ const ErrorText = styled.Text`
 `;
 
 const Login = ({ navigation }) => {
+    const { spinner } = useContext(ProgressContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const passwordRef = useRef();
@@ -55,12 +56,16 @@ const Login = ({ navigation }) => {
 
     const _handleLoginButtonPress = async () => {
         try {
+            spinner.start();
             const user = await login({ email, password });
             Alert.alert('Login Success', user.email);
         } catch (e) {
             Alert.alert('Login Error', e.message);
+        } finally {
+            spinner.stop();
         }
-    }
+    };
+    
     return (
         <KeyboardAwareScrollView
             contentContainerStyle={{ flex: 1 }}
