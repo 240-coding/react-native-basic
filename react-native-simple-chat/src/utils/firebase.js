@@ -79,3 +79,13 @@ export const createChannel = async ({ title, description }) => {
     await newChannelRef.set(newChannel);
     return id;
 };
+
+export const createMessage = async ({ channelId, text }) => {
+    return await DB.collection('channels')
+        .doc(channelId)
+        .collection('messages')
+        .add({
+            text,
+            createdAt: Date.now(),
+        });
+};
