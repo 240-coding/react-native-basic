@@ -62,25 +62,39 @@ const Channel = ( {navigation, route: { params }} ) => {
         navigation.setOptions({ headerTitle: params.title || 'Channel' });
     }, []);
 
-    const _handleMessageSend = () => {};
+    const _handleMessageSend = async messageList => {
+        const newMessage = messageList[0];
+        try {
+            await createMessage({ channelId: params.id, message: newMessage });
+        } catch (e) {
+            Alert.alert('Send Message Error', e.message);
+        }
+    };
     
     return (
         <Container>
-            <FlatList
-                keyExtractor={item => item['id']}
-                data={messages}
-                renderItem={({ item }) => (
-                    <Text style={{ fontSize: 24 }}>{item.text}</Text>
-                )}
-                inverted={true}
-            />
-            <Input
-                value={text}
-                onChangeText={text => setText(text)}
-                onSubmitEditing={() => createMessage({ channelId: params.id, text })}
-            />
+          <GiftedChat
+            listViewProps={{
+              style: { backgroundColor: theme.background },
+            }}
+            placeholder="Enter a message..."
+            messages={messages}
+            user={{ _id: uid, name, avatar: photoUrl }}
+            onSend={_handleMessageSend}
+            alwaysShowSend={true}
+            textInputProps={{
+              autoCapitalize: 'none',
+              autoCorrect: false,
+              textContentType: 'none', // iOS only
+              underlineColorAndroid: 'transparent', // Android only
+            }}
+            multiline={false}
+            renderUsernameOnMessage={true}
+            scrollToBottom={true}
+            renderSend={props => <SendButton {...props} />}
+          />
         </Container>
-    );
-};
+      );
+    };
 
 export default Channel;
